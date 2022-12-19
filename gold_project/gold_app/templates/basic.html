@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Ninja Gold</title>
+</head>
+
+<body>
+    <main role="main">
+        <div class="full-page">
+            <div class="inenr-full-page">
+                <form action="/reset">
+                    <div class="col-md-6">
+                        Your gold :<label for="your_gold" class="control">{{ request.session.totalgold }}</label>
+                    </div>
+                </form>
+                <div class="continer">
+                    <form action="/calculate" method="post">
+                        {% csrf_token %}
+                        <div class="box">
+                            <div class="div-70">
+                                <p>Farm</p>
+                                <input type="hidden" name="building" value="farm" />
+                                <p>(earns 10 - 20 golds)</p>
+                                <button type="submit" class="form-control">Find Gold!</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="/calculate" method="post">
+                        {% csrf_token %}
+                        <div class="box">
+                            <div class="div-70">
+                                <p>Cave</p>
+                                <input type="hidden" name="building" value="cave" />
+                                <p>(earns 10 - 20 golds)</p>
+                                <button type="submit" class="form-control">Find Gold!</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="/calculate" method="post">
+                        {% csrf_token %}
+                        <div class="box">
+                            <div class="div-70">
+                                <p>House</p>
+                                <input type="hidden" name="building" value="house" />
+                                <p>(earns 10 - 20 golds)</p>
+                                <button type="submit" class="form-control">Find Gold!</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="/calculate" method="post">
+                        {% csrf_token %}
+                        <div class="box">
+                            <div class="div-70">
+                                <p>Casino</p>
+                                <input type="hidden" name="building" value="casino" />
+                                <p>(earns 0 - 50 golds)</p>
+                                <button type="submit" class="form-control">Find Gold!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="activity">
+                    {% for x in request.session.logs %}
+                    {% if x.flag %}
+                    <h4 class="red">{{ x.log }}</h4>
+                    {% else %}
+                    <h4><span class="blue">{{ x.log }}</span></h4>
+                    {% endif %}
+                    {% endfor %}<br>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
